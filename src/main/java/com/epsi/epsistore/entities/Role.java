@@ -1,4 +1,11 @@
 package com.epsi.epsistore.entities;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +25,7 @@ public class Role {
 
     @Column(name = "priority_index")
     private int priorityIndex;
+
 
 }
 
