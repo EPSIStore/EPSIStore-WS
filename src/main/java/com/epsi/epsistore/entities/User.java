@@ -1,10 +1,5 @@
 package com.epsi.epsistore.entities;
 
-import java.util.HashSet;
-import java.util.List;
-
-import org.hibernate.mapping.Set;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,14 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.stream.Collectors;
 
 
 @Entity
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="users")
 public class User implements UserDetails {
