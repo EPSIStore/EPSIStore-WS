@@ -6,6 +6,7 @@
 		<groupId>com.epsi</groupId>
 		<artifactId>epsi-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../epsi-core/pom.xml</relativePath>
 	</parent>
 	<groupId>com.epsi</groupId>
 	<artifactId>epsistore</artifactId>
@@ -18,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.epsi</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>epsi-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -83,39 +84,23 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.epsi</groupId>
-			<artifactId>epsistore</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<mainClass>com.epsi.epsistore.EpsiStoreApplication</mainClass>
-							<classifier>jar-with-dependencies</classifier>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
-
 		</plugins>
-
 	</build>
 
 </project>
