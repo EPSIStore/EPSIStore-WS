@@ -32,6 +32,9 @@ J'ai pensé à deux solutions :
 - Trouver un moyens de se connecter à l'aide de requetes pour faire une connection depuis le front directement
 
 ### Etape 2 : Recuperer le token à partir du code<a name="token" />
+
+Methode de recuperation du token temporaire !!
+
 Faire une requete post vers http://127.0.0.1:8000/oauth2/token \
 Le Header de la requete doit contenir :
 - 'Access-Control-Allow-Origin': '*'
@@ -58,6 +61,8 @@ Pour faire une requete vers un MS protege, il suffit simplement d'ajouter dans l
 'Authorization': 'Bearer {access_token}'
 
 ## Sécuriser un MS<a name="secuMS" />
+
+Methode temporaire !!
 
 ### Gestion du token<a name="gestToken" />
 Recuperer les fichiers : https://drive.google.com/file/d/1E4T1fj714EnJypYCE2-vY_OirvF6nzF_/view?usp=sharing \

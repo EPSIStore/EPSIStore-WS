@@ -53,6 +53,10 @@ public class SpringSecurityConfiguration {
     // A MODIFIER POUR RECUPERER LES USERS DU SERVER
     public UserDetailsService users() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        UserDetails everybody = User.withUsername("everybody")
+                .password(encoder.encode("password"))
+                .roles()
+                .build();
         UserDetails user = User.withUsername("sergey")
                 .password(encoder.encode("password"))
                 .roles("USER")
