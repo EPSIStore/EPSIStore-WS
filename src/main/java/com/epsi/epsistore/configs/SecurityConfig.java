@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/api/auth/login").permitAll()
                                 .requestMatchers("/api/auth/register").permitAll()
-                                .requestMatchers("/api/test").permitAll()
+                                .requestMatchers("/api/auth/test").permitAll()
                                 .anyRequest()
                                 .authenticated()
 
@@ -58,7 +58,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         final CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost"
+                "http://localhost",
+                "http://localhost:4200"
+
 
         ));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "No-Auth"));
