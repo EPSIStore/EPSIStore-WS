@@ -67,5 +67,3 @@ public class JwtUtils {
         return claims.get(claimName) != null;
     }
 }
-
-

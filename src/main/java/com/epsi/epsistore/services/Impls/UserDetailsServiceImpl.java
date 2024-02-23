@@ -1,4 +1,4 @@
-package com.epsi.epsistore.services.impls;
+package com.epsi.epsistore.services.Impls;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,4 +17,3 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
         return this.userService.findByEmail(username);
     }
 }
-

@@ -1,5 +1,11 @@
 package com.epsi.epsistore.controllers;
 
+
+import com.epsi.epsistore.configs.JwtUtils;
+import com.epsi.epsistore.dtos.AuthResponseDTO;
+import com.epsi.epsistore.dtos.LoginDTO;
+import com.epsi.epsistore.dtos.RegisterDTO;
+import com.epsi.epsistore.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,15 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
-import com.epsi.epsistore.configs.JwtUtils;
-import com.epsi.epsistore.dtos.AuthResponseDTO;
-import com.epsi.epsistore.dtos.LoginDTO;
-import com.epsi.epsistore.dtos.RegisterDTO;
-import com.epsi.epsistore.services.UserService;
-
 import org.slf4j.Logger;
-
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -30,6 +28,7 @@ public class UserController {
     private final UserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
     private final UserService userService;
+
 
 
     // api request for connection

@@ -1,5 +1,11 @@
-package com.epsi.epsistore.services.impls;
+package com.epsi.epsistore.services.Impls;
 
+
+import com.epsi.core.entities.Role;
+import com.epsi.core.entities.User;
+import com.epsi.core.repositories.RoleRepository;
+import com.epsi.core.repositories.UserRepository;
+import com.epsi.epsistore.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,18 +15,10 @@ import org.springframework.stereotype.Service;
 import com.epsi.epsistore.configs.JwtUtils;
 import com.epsi.epsistore.dtos.AuthResponseDTO;
 import com.epsi.epsistore.dtos.RegisterDTO;
-import com.epsi.epsistore.entities.Role;
-import com.epsi.epsistore.entities.User;
-import com.epsi.epsistore.repositories.RoleRepository;
-import com.epsi.epsistore.repositories.UserRepository;
-import com.epsi.epsistore.services.UserService;
-
-import java.util.Collections;
-
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -32,7 +30,7 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("No user was found"));
     }
 
-     // method configuring user registration
+    // method configuring user registration
     @Override
     public AuthResponseDTO register(RegisterDTO registerDto) {
         String roleName = "ROLE_USER";
