@@ -5,6 +5,7 @@ import com.epsi.epsistore.configs.JwtUtils;
 import com.epsi.epsistore.dtos.AuthResponseDTO;
 import com.epsi.epsistore.dtos.LoginDTO;
 import com.epsi.epsistore.dtos.RegisterDTO;
+import com.epsi.epsistore.services.Impls.TestWebClient;
 import com.epsi.epsistore.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class UserController {
     private final UserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
     private final UserService userService;
+    private final TestWebClient test;
 
 
 
@@ -63,5 +65,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'inscription de l'utilisateur.");
         }
     }
+
+    @GetMapping("/message")
+    public String getMessage() {
+        return test.getMessage();
+    }
+
 
 }

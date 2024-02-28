@@ -40,6 +40,7 @@ public class SecurityConfig {
                         req.requestMatchers("/api/auth/login").permitAll()
                                 .requestMatchers("/api/auth/register").permitAll()
                                 .requestMatchers("/api/auth/test").permitAll()
+                                .requestMatchers("/api/auth/message").permitAll()
                                 .anyRequest()
                                 .authenticated()
 
