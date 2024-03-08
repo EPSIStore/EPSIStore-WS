@@ -5,6 +5,7 @@ import com.epsi.core.entities.Role;
 import com.epsi.core.entities.User;
 import com.epsi.core.repositories.RoleRepository;
 import com.epsi.core.repositories.UserRepository;
+import com.epsi.epsistore.configs.CustomUserDetails;
 import com.epsi.epsistore.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
         // create a BCryptPasswordEncoder object to encode passwords
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         // creation of the user with his information
         var user = User.builder()
                 .email(registerDto.getUsername())
@@ -52,11 +54,17 @@ public class UserServiceImpl implements UserService {
                 .role(role)
                 .build();
         userRepository.save(user);
+
+        // create an instance of CustomUserDetails
+        CustomUserDetails customUserDetails = new CustomUserDetails();
+        customUserDetails.setUser(user);
+
         // generation and return of the token
-        var jwtToken = jwtUtils.generateToken(user);
+        var jwtToken = jwtUtils.generateToken(customUserDetails);
         return AuthResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
+
 
 }
