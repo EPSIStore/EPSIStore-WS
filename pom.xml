@@ -5,13 +5,14 @@
 	<parent>
 		<groupId>com.epsi</groupId>
 		<artifactId>epsi-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
+		<relativePath />
 	</parent>
 	<groupId>com.epsi</groupId>
-	<artifactId>epsistore</artifactId>
+	<artifactId>authentification</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EPSIStore</name>
-	<description>EPSI Store WS</description>
+	<name>Authentification</name>
+	<description>EPSI Authentification WS</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -19,7 +20,7 @@
 		<dependency>
 			<groupId>com.epsi</groupId>
 			<artifactId>epsi-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
