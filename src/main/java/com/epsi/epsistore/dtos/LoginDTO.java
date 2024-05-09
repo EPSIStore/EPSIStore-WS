@@ -1,22 +1,19 @@
 package com.epsi.epsistore.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginDTO {
 
     @JsonProperty(value = "email")
-    public String username;
+    private String username;
     @JsonProperty(value = "pwd")
-    public String password;
-
-    public LoginDTO(String email, String password) {
-        this.username = email;
-        this.password = password;
-    }
+    private String password;
 }

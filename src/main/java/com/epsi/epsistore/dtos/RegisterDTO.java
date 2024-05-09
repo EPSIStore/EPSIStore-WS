@@ -11,9 +11,9 @@ import lombok.*;
 @Getter
 public class RegisterDTO {
 
-    @JsonProperty("email")
+    @JsonProperty(value = "email")
     private String username;
-    @JsonProperty("pwd")
-    private String pwd;
+    @JsonProperty(value = "pwd")
+    private String password;
 
 }
