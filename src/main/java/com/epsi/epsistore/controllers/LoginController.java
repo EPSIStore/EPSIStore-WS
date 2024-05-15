@@ -1,10 +1,7 @@
 package com.epsi.epsistore.controllers;
 
 import com.epsi.core.entities.User;
-import com.epsi.epsistore.dtos.LoginDTO;
-import com.epsi.epsistore.dtos.RegisterDTO;
-import com.epsi.epsistore.dtos.ResponseBodyDTO;
-import com.epsi.epsistore.dtos.TEST;
+import com.epsi.epsistore.dtos.*;
 import com.epsi.epsistore.services.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,9 +56,6 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<ResponseBodyDTO> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response){
         try{
-            System.out.println(loginDTO.getUsername() + "|" + loginDTO.getPassword());
-            System.out.println(userDetailsService.loadUserByUsername(loginDTO.getUsername()).getPassword());
-            System.out.println(loginDTO.getUsername() + "|" + loginDTO.getPassword());
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginDTO.getUsername(),
@@ -91,30 +85,6 @@ public class LoginController {
         return "ok";
     }
 
-    @GetMapping("/test")
-    public String test(HttpServletRequest request){
-        HttpSession session = request.getSession(true);
-        Authentication authentication = securityContextHolderStrategy.getContext().getAuthentication();
-        DeferredSecurityContext context = securityContextRepository.loadDeferredContext(request);
-        if(context.isGenerated()){
-            System.out.println("gene");
-            System.out.println(context.get().getAuthentication());
-        }
-        else {
-            System.out.println("No gene");
-            System.out.println(context.get().getAuthentication());
-        }
-        if(authentication != null){
-            System.out.println(authentication.getName());
-        }
-        if(session != null){
-            return session.getId();
-        }
-        else{
-            return "ok";
-        }
-    }
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDto) {
         try {
@@ -125,21 +95,30 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/get_cookie")
-    public String getCookie(HttpServletRequest request){
-        DeferredSecurityContext context = securityContextRepository.loadDeferredContext(request);
-        if(context.isGenerated()){
-            return "gene";
+    @GetMapping("/anon")
+    public boolean anonSession(HttpServletResponse response, HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        if(session.isNew()){
+            return true;
         }
         else{
-            return "nongene";
+            return false;
         }
     }
 
-    @GetMapping("/set_cookie")
-    public String setCookie(@RequestParam("cookie") String id, @RequestParam("redirect_uri") String uri, HttpServletResponse response) throws IOException {
-        response.addHeader("Set-Cookie", "JSESSIONID="+id+"; Path=/; HttpOnly; SameSite=None");
-        response.sendRedirect(uri);
-        return id;
+    @PostMapping("/correct-credentials")
+    public boolean CorrectCredentials(@RequestBody LoginDTO login){
+        try {
+            User user = userService.findByEmail(login.getUsername());
+            return passwordEncoder.matches(login.getPassword(), user.getPwd());
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    @PostMapping("/encode-password")
+    public String EncodePassword(@RequestBody String password){
+        return passwordEncoder.encode(password);
     }
 }

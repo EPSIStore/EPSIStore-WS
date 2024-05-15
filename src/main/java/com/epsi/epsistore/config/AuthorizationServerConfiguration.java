@@ -1,5 +1,7 @@
 package com.epsi.epsistore.config;
 
+import com.epsi.core.repositories.UserRepository;
+import com.epsi.epsistore.entity.UserDetailsImpl;
 import com.epsi.epsistore.filters.CORSFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -23,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -48,6 +51,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.time.Duration;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -56,6 +60,8 @@ import java.util.stream.Collectors;
 public class AuthorizationServerConfiguration {
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    UserRepository userRepository;
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
@@ -146,10 +152,12 @@ public class AuthorizationServerConfiguration {
         return context -> {
             if (context.getTokenType() == OAuth2TokenType.ACCESS_TOKEN) {
                 Authentication principal = context.getPrincipal();
+                UserDetailsImpl userDetails = (UserDetailsImpl) principal.getPrincipal();
                 Set<String> authorities = principal.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet());
                 context.getClaims().claim("roles", authorities);
+                context.getClaims().claim("userId", userDetails.getUser().getIdUser());
             }
         };
     }

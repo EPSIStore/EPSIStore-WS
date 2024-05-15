@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(int id) {
+        return this.userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("No user was found"));
+    }
+
+    @Override
     public String register(RegisterDTO registerDto) {
         String roleName = "ROLE_USER";
 
