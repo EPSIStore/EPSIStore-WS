@@ -89,9 +89,9 @@ public class LoginController {
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDto) {
         try {
             String response = userService.register(registerDto);
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(new ResponseBodyDTO(response));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'inscription de l'utilisateur." + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseBodyDTO("Une erreur est survenue lors de l'inscription de l'utilisateur." + e.getMessage()));
         }
     }
 
