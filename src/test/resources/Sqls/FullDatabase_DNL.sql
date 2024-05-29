@@ -1,0 +1,4 @@
+INSERT INTO roles(name_role, priority_index) VALUES ('ROLE_ANON', 0),('ROLE_USER', 1),('ROLE_ADMIN', 2);
+INSERT INTO users(username, email, pwd, id_user, name_role) VALUES ('anon', 'anon', '$2a$10$wAah7DPX8hOpmudVmcuV4.dQyW1EHRn8EgA/KLXZEfYsADSTrpjyO', 100, 'ROLE_ANON');
+INSERT INTO users(username, email, pwd, id_user, name_role) VALUES ('benjamin', 'test@mail.com', '$2a$10$JVdc.CpGaEYJ5VcpUY9E3eWv2RQO8PE.4qG7QsBjf5s8QlhR2Mmn2', 101, 'ROLE_USER');
+INSERT INTO users(username, email, pwd, id_user, name_role) VALUES (NULL, 'admin@mail.com', '$2a$10$oDBfEJULg8SiSW0U1nVts.iVVpMN3fPNGHmSAsahkkr3YDcH/4zFm', 102, 'ROLE_ADMIN');
